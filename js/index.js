@@ -1,7 +1,6 @@
 const cards = ["baggio", "beckham", "casillas", "cr7", "Cruyff", "eto", "messi", "neymar", "ronaldinho", "sergio_ramos"]
 const desorden = desordenar().slice();
-console.log(cards);
-
+console.log(desorden);
 function desordenar() {
     for (let i = cards.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
@@ -26,17 +25,19 @@ var nCartasVolteadas = 0;
 var cartaVolteada;
 var nMov;
 function voltear(card) {
-    if(nCartasVolteadas < 2){        
+    //Es la unica forma que encontre para validar que no se de clic cuando la carta esta voltada y creo que no les va a funcionar a ustedes
+    //pero ya tengo una idea para arreglarlo
+    if(nCartasVolteadas < 2 && card.src == "http://127.0.0.1:5500/resources/carta.webp"){      
         if (card.alt - 1 >= cards.length) {
             if (bandera) {
                 console.log(desordenar());
                 bandera = 0;
-            }else if(nCartasVolteadas < 2){
-                console.log(card);
-                card.src = "resources/" + cards[card.alt - 11] + ".webp";
-                console.log(card.id);
             }
-            
+
+            console.log(card);
+            card.src = "resources/" + cards[card.alt - 11] + ".webp";
+            console.log(card.id);
+             
         } else {    
             console.log(card);
             card.src = "resources/" + desorden[card.alt - 1] + ".webp";
