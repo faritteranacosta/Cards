@@ -1,51 +1,43 @@
-const cards = ["baggio", "beckham", "casillas", "cr7", "Cruyff", "eto", "messi", "neymar", "ronaldinho", "sergio_ramos"]
-const desorden = desordenar().slice();
-console.log(desorden);
-function desordenar() {
-    for (let i = cards.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        let k = cards[i];
-        cards[i] = cards[j];
-        cards[j] = k;
-    }
+// Duplicar las cartas y mezclarlas
+const cards = ["baggio", "beckham", "casillas", "cr7", "Cruyff", "eto", "messi", "neymar", "ronaldinho", "sergio_ramos"];
+const allCards = [...cards, ...cards];
+const desorden = desordenar(allCards);
+var nCartasVolteadas = 0;
+var cartaVolteada;
+var nMov;
 
-    return cards;
+console.log(desorden);
+
+function desordenar(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
 }
 
-for (let i = 0; i < cards.length * 2; i++) {
-    const card = document.createRange().createContextualFragment(/*html*/`
-        <div class="container" onclick = "voltear(img${i + 1})"> <div class="card"><img id = "img${i + 1}" src="resources/carta.webp" alt="${i + 1}"></div></div>
+//Agregar cartas en El DOM
+for (let i = 0; i < desorden.length; i++) {
+    const card = document.createRange().createContextualFragment(/*html*/ `
+        <div class="container" onclick="voltear(img${i + 1})">
+            <div class="card">
+                <img id="img${i + 1}" src="resources/carta.webp" alt="${desorden[i]}">
+            </div>
+        </div>
     `);
     const section = document.querySelector("section");
     section.append(card);
 }
 
-var bandera = 1;
-var nCartasVolteadas = 0;
-var cartaVolteada;
-var nMov;
 function voltear(card) {
-    //Es la unica forma que encontre para validar que no se de clic cuando la carta esta voltada y creo que no les va a funcionar a ustedes
-    //pero ya tengo una idea para arreglarlo
-    if(nCartasVolteadas < 2 && card.src == "http://127.0.0.1:5500/resources/carta.webp"){      
-        if (card.alt - 1 >= cards.length) {
-            if (bandera) {
-                console.log(desordenar());
-                bandera = 0;
-            }
-
-            console.log(card);
-            card.src = "resources/" + cards[card.alt - 11] + ".webp";
-            console.log(card.id);
-             
-        } else {    
-            console.log(card);
-            card.src = "resources/" + desorden[card.alt - 1] + ".webp";
-            console.log(card.id);
-        }
-    
-        nCartasVolteadas++; 
+    if (nCartasVolteadas < 2 && card.src.endsWith("carta.webp")) {
+        console.log(card);
+        card.src = `resources/${card.alt}.webp`; 
+        nCartasVolteadas++;
         console.log(nCartasVolteadas);
+
         if (nCartasVolteadas == 1) {
             cartaVolteada = card;
         } else if (nCartasVolteadas == 2) {
@@ -63,7 +55,7 @@ function voltear(card) {
                 }, 1000);
             }
         }
-    }else{
+    } else {
         alert("NO");
     }
 }
