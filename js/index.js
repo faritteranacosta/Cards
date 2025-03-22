@@ -2,40 +2,71 @@ const cards = ["baggio", "beckham", "casillas", "cr7", "Cruyff", "eto", "messi",
 const desorden = desordenar().slice();
 console.log(cards);
 
-function desordenar(){
-    for (let i = cards.length -1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i+1));
+function desordenar() {
+    for (let i = cards.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
         let k = cards[i];
         cards[i] = cards[j];
         cards[j] = k;
-      }
+    }
 
     return cards;
 }
 
-for (let i = 0; i < cards.length*2; i++) {
+for (let i = 0; i < cards.length * 2; i++) {
     const card = document.createRange().createContextualFragment(/*html*/`
-        <div class="container" onclick = "voltear(img${i+1})"> <div class="card"><img id = "img${i+1}" src="resources/carta.webp" alt="${i+1}"></div></div>
+        <div class="container" onclick = "voltear(img${i + 1})"> <div class="card"><img id = "img${i + 1}" src="resources/carta.webp" alt="${i + 1}"></div></div>
     `);
     const section = document.querySelector("section");
     section.append(card);
 }
 
-var bandera = 1 ;
-
-function voltear(card){
-    if (card.alt-1 >= cards.length) {
-        if(bandera){
-            console.log(desordenar());
-            bandera = 0;
-        }
-        
+var bandera = 1;
+var nCartasVolteadas = 0;
+var cartaVolteada;
+var nMov;
+function voltear(card) {
+    if(nCartasVolteadas < 2){        
+        if (card.alt - 1 >= cards.length) {
+            if (bandera) {
+                console.log(desordenar());
+                bandera = 0;
+            }else if(nCartasVolteadas < 2){
+                console.log(card);
+                card.src = "resources/" + cards[card.alt - 11] + ".webp";
+                console.log(card.id);
+            }
+            
+        } else {    
             console.log(card);
-            card.src = "resources/"+cards[card.alt-11]+".webp";
-            console.log(card.id)
+            card.src = "resources/" + desorden[card.alt - 1] + ".webp";
+            console.log(card.id);
+        }
+    
+        nCartasVolteadas++; 
+        console.log(nCartasVolteadas);
+        if (nCartasVolteadas == 1) {
+            cartaVolteada = card;
+        } else if (nCartasVolteadas == 2) {
+            nMov++;
+            console.log(card.src);
+            if (card.src == cartaVolteada.src && card.id != cartaVolteada.id) {
+                console.log("correcto");
+                nCartasVolteadas = 0;
+            } else {
+                console.log("Error");
+                setTimeout(function reverso() {
+                    card.src = "resources/carta.webp";
+                    cartaVolteada.src = "resources/carta.webp";
+                    nCartasVolteadas = 0;
+                }, 1000);
+            }
+        }
     }else{
-        console.log(card);
-        card.src = "resources/"+desorden[card.alt-1]+".webp";
-        console.log(card.id)
-    }    
+        alert("NO");
+    }
 }
+
+
+
+
