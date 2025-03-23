@@ -3,8 +3,18 @@ const cards = ["baggio", "beckham", "casillas", "cr7", "Cruyff", "eto", "messi",
 const allCards = [...cards, ...cards];
 const desorden = desordenar(allCards);
 var nCartasVolteadas = 0;
+var nCartasVolteadasTotal = 0;
+var nMov = 0;
 var cartaVolteada;
-var nMov;
+
+var timer = null;
+let timeElapsed = 0;
+
+function actualizarTemporizador() {
+    timeElapsed++;
+    document.getElementById("timer").innerHTML = timeElapsed;
+}
+
 
 console.log(desorden);
 
@@ -27,37 +37,51 @@ for (let i = 0; i < desorden.length; i++) {
             </div>
         </div>
     `);
-    const section = document.querySelector("section");
+    const section = document.getElementById("section2");
     section.append(card);
 }
 
 function voltear(card) {
     if (nCartasVolteadas < 2 && card.src.endsWith("carta.webp")) {
-        console.log(card);
+
+        if (nMov == 0 && nCartasVolteadas == 0) {
+            timer = setInterval(actualizarTemporizador, 1000);
+        }
+
         card.src = `resources/${card.alt}.webp`; 
         nCartasVolteadas++;
-        console.log(nCartasVolteadas);
 
         if (nCartasVolteadas == 1) {
             cartaVolteada = card;
         } else if (nCartasVolteadas == 2) {
             nMov++;
+            document.getElementById("movimientos").innerHTML= nMov;
             console.log(card.src);
             if (card.src == cartaVolteada.src && card.id != cartaVolteada.id) {
-                console.log("correcto");
-                nCartasVolteadas = 0;
+                console.log(nCartasVolteadasTotal);
+                if(nCartasVolteadasTotal == cards.length-1){
+                    clearInterval(timer);
+                    Swal.fire({
+                        title: "¡Felicidades!",
+                        icon: "success",
+                        text: `Lo conseguiste en ${nMov} movimientos y ${timeElapsed} segundos`,
+                        draggable: true
+                      });
+                      
+                }else{
+                    nCartasVolteadasTotal++;
+                    nCartasVolteadas = 0;
+                }
             } else {
                 console.log("Error");
                 setTimeout(function reverso() {
                     card.src = "resources/carta.webp";
                     cartaVolteada.src = "resources/carta.webp";
                     nCartasVolteadas = 0;
-                }, 1000);
+                }, 600);
             }
         }
-    } else {
-        alert("NO");
-    }
+    } 
 }
 
 
