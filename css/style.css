@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'MiFuente';
-    src: url('/resources/Champions.ttf') format('opentype');
+    src: url('/resources/Champions.ttf') format('ttf');
     font-weight: normal;
     font-style: normal;
 }
