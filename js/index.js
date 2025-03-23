@@ -3,18 +3,9 @@ const cards = ["baggio", "beckham", "casillas", "cr7", "Cruyff", "eto", "messi",
 const allCards = [...cards, ...cards];
 const desorden = desordenar(allCards);
 var nCartasVolteadas = 0;
-var nCartasVolteadasTotal = 0;
-var nMov = 0;
 var cartaVolteada;
-
-var timer = null;
-let timeElapsed = 0;
-
-function actualizarTemporizador() {
-    timeElapsed++;
-    document.getElementById("timer").innerHTML = timeElapsed;
-}
-
+var nMov = 0;
+var cartasEmparejadas = 0;
 
 console.log(desorden);
 
@@ -31,59 +22,60 @@ function desordenar(array) {
 //Agregar cartas en El DOM
 for (let i = 0; i < desorden.length; i++) {
     const card = document.createRange().createContextualFragment(/*html*/ `
-        <div class="container" onclick="voltear(img${i + 1})">
-            <div class="card">
-                <img id="img${i + 1}" src="resources/carta.webp" alt="${desorden[i]}">
+        <div class="container">
+            <div class="card" id="card${i + 1}" data-card="${desorden[i]}" onclick="voltear(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                    <img src="resources/champions.svg" alt="c" width="160" height="160">
+                    </div>
+                    <div class="card-back">
+                        <img src="resources/${desorden[i]}.webp" alt="${desorden[i]}">
+                    </div>
+                </div>
             </div>
         </div>
     `);
-    const section = document.getElementById("section2");
+    const section = document.querySelector("section");
     section.append(card);
 }
 
 function voltear(card) {
-    if (nCartasVolteadas < 2 && card.src.endsWith("carta.webp")) {
+    // Si ya están 2 cartas volteadas, la carta está volteada, o está deshabilitada, no hacer nada
+    if (nCartasVolteadas >= 2 || card.classList.contains('flipped') || card.classList.contains('disabled')) {
+        return;
+    }
+    card.classList.add('flipped');
+    nCartasVolteadas++;
+    
+    if (nCartasVolteadas == 1) {
+        // Primera carta volteada
+        cartaVolteada = card;
+    } else if (nCartasVolteadas == 2) {
+        // Segunda carta volteada
+        nMov++;
+        document.getElementById('movs').innerText = nMov;//agrega el numero de movimientos
+        // Comprobar si forman par
+        if (card.dataset.card === cartaVolteada.dataset.card && card.id !== cartaVolteada.id) {
+            console.log("correcto");
+            // Deshabilitar las cartas emparejadas
+            setTimeout(function() {
+                card.classList.add('disabled');
+                cartaVolteada.classList.add('disabled');
+                nCartasVolteadas = 0;
+                cartasEmparejadas += 2;
 
-        if (nMov == 0 && nCartasVolteadas == 0) {
-            timer = setInterval(actualizarTemporizador, 1000);
-        }
-
-        card.src = `resources/${card.alt}.webp`; 
-        nCartasVolteadas++;
-
-        if (nCartasVolteadas == 1) {
-            cartaVolteada = card;
-        } else if (nCartasVolteadas == 2) {
-            nMov++;
-            document.getElementById("movimientos").innerHTML= nMov;
-            console.log(card.src);
-            if (card.src == cartaVolteada.src && card.id != cartaVolteada.id) {
-                console.log(nCartasVolteadasTotal);
-                if(nCartasVolteadasTotal == cards.length-1){
-                    clearInterval(timer);
-                    Swal.fire({
-                        title: "¡Felicidades!",
-                        icon: "success",
-                        text: `Lo conseguiste en ${nMov} movimientos y ${timeElapsed} segundos`,
-                        draggable: true
-                      });
-                      
-                }else{
-                    nCartasVolteadasTotal++;
-                    nCartasVolteadas = 0;
+                if (cartasEmparejadas === allCards.length) {
+                    alert('Ganaste!');
                 }
-            } else {
-                console.log("Error");
-                setTimeout(function reverso() {
-                    card.src = "resources/carta.webp";
-                    cartaVolteada.src = "resources/carta.webp";
-                    nCartasVolteadas = 0;
-                }, 600);
-            }
+            }, 500);
+        } else {
+            console.log("Error");
+            // Volver a ocultar las cartas después de un tiempo
+            setTimeout(function() {
+                card.classList.remove('flipped');
+                cartaVolteada.classList.remove('flipped');
+                nCartasVolteadas = 0;
+            }, 1000);
         }
-    } 
+    }
 }
-
-
-
-
