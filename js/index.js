@@ -7,6 +7,21 @@ var cartaVolteada;
 var nMov = 0;
 var cartasEmparejadas = 0;
 
+const sonido = new Audio('resources/audios/carta_incorrecta.mp3');
+const sonido_correct = new Audio('resources/audios/carta_correcta.mp3');
+const champions = new Audio('resources/audios/himno_champions_league.mp3');
+function playAudio(sonido){
+    sonido.play();
+}
+
+var timer = null;
+let timeElapsed = 0;
+
+function actualizarTemporizador() {
+    timeElapsed++;
+    document.getElementById("timer").innerHTML = timeElapsed;
+}
+
 console.log(desorden);
 
 function desordenar(array) {
@@ -45,6 +60,10 @@ function voltear(card) {
         return;
     }
     card.classList.add('flipped');
+    if (nMov == 0 && nCartasVolteadas == 0) {
+        // Inicia el temporizador al voltear la primera carta
+        timer = setInterval(actualizarTemporizador, 1000);
+    }
     nCartasVolteadas++;
     
     if (nCartasVolteadas == 1) {
@@ -57,6 +76,9 @@ function voltear(card) {
         // Comprobar si forman par
         if (card.dataset.card === cartaVolteada.dataset.card && card.id !== cartaVolteada.id) {
             console.log("correcto");
+            playAudio(sonido_correct);
+          
+
             // Deshabilitar las cartas emparejadas
             setTimeout(function() {
                 card.classList.add('disabled');
@@ -65,17 +87,35 @@ function voltear(card) {
                 cartasEmparejadas += 2;
 
                 if (cartasEmparejadas === allCards.length) {
-                    alert('Ganaste!');
+                    clearInterval(timer); // Detiene el temporizador
+                    playAudio(champions);
+                    Swal.fire({
+                        title: "¡Felicidades!",
+                        text: `Lo conseguiste en ${nMov} movimientos y  segundos`,
+                        imageUrl: "resources/win/colombia.gif",
+                        imageWidth: 600,
+                        imageHeight: 500,
+                        imageAlt: "Custom image",
+                        draggable: true,
+                        width: 650,
+                        height: 630,
+                        showCancelButton: true,
+                        confirmButtonText: 'Reload'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload(); // Recarga la página
+                        }
+                    });
                 }
             }, 500);
         } else {
-            console.log("Error");
+            playAudio(sonido);
             // Volver a ocultar las cartas después de un tiempo
             setTimeout(function() {
                 card.classList.remove('flipped');
                 cartaVolteada.classList.remove('flipped');
                 nCartasVolteadas = 0;
-            }, 1000);
+            }, 600);
         }
     }
 }
