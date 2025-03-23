@@ -1,7 +1,15 @@
+@font-face {
+    font-family: 'MiFuente';
+    src: url('/resources/Champions.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'MiFuente', sans-serif;
 }
 
 html {
@@ -9,7 +17,8 @@ html {
 }
 
 body {
-    background-color:darkgray;
+    background:
+    linear-gradient(to right, transparent, rgb(40, 6, 142)), url("/resources/uefa.svg");
     display: flex;
     justify-content: center;
     align-items: center;
