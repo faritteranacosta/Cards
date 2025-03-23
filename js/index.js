@@ -11,7 +11,7 @@ const sonido = new Audio('resources/audios/carta_incorrecta.mp3');
 const sonido_correct = new Audio('resources/audios/carta_correcta.mp3');
 const champions = new Audio('resources/audios/himno_champions_league.mp3');
 const volea = new Audio('resources/audios/carta_Voltea.mp3');
-function playAudio(sonido){
+function playAudio(sonido) {
     sonido.play();
 }
 
@@ -56,7 +56,6 @@ for (let i = 0; i < desorden.length; i++) {
 }
 
 function voltear(card) {
-    playAudio(volea);
     // Si ya están 2 cartas volteadas, la carta está volteada, o está deshabilitada, no hacer nada
     if (nCartasVolteadas >= 2 || card.classList.contains('flipped') || card.classList.contains('disabled')) {
         return;
@@ -67,11 +66,13 @@ function voltear(card) {
         timer = setInterval(actualizarTemporizador, 1000);
     }
     nCartasVolteadas++;
-    
+
     if (nCartasVolteadas == 1) {
+        playAudio(volea);
         // Primera carta volteada
         cartaVolteada = card;
     } else if (nCartasVolteadas == 2) {
+        playAudio(volea);
         // Segunda carta volteada
         nMov++;
         document.getElementById('movs').innerText = nMov;//agrega el numero de movimientos
@@ -79,10 +80,10 @@ function voltear(card) {
         if (card.dataset.card === cartaVolteada.dataset.card && card.id !== cartaVolteada.id) {
             console.log("correcto");
             playAudio(sonido_correct);
-          
+
 
             // Deshabilitar las cartas emparejadas
-            setTimeout(function() {
+            setTimeout(function () {
                 card.classList.add('disabled');
                 cartaVolteada.classList.add('disabled');
                 nCartasVolteadas = 0;
@@ -113,7 +114,7 @@ function voltear(card) {
         } else {
             playAudio(sonido);
             // Volver a ocultar las cartas después de un tiempo
-            setTimeout(function() {
+            setTimeout(function () {
                 card.classList.remove('flipped');
                 cartaVolteada.classList.remove('flipped');
                 nCartasVolteadas = 0;

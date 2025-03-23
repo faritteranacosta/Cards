@@ -37,6 +37,7 @@ section {
     margin: 0 auto;
     padding: 20px;
     gap: 18px;
+    transition: all 0.5s ease-in-out; /* Transición suave */
 }
 
 .card {
@@ -45,7 +46,9 @@ section {
     perspective: 1000px;
     padding: px;
     cursor: pointer;
+    transition: transform 0.4s ease-in-out, width 0.4s ease-in-out, height 0.4s ease-in-out;
 }
+
 
 .card-inner {
     position: relative;
@@ -76,6 +79,10 @@ section {
     justify-content: center;
 }
 
+.card-front img{
+    width: 100%; /* Reduce el tamaño de la imagen dentro de la carta */
+    height: 110%;
+}
 
 .card-back {
     background-color: white;
@@ -95,17 +102,19 @@ section {
 }
 
 @media (max-width: 800px) {
-    main{
-        width: 80%;
+    main {
+        width: 90%;
+        transition: width 0.5s ease-in-out;
     }
 
-    .container {
-        padding: 5px;
+    section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
     }
 
-    .card{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .card {
+        width: 100px;
+        height: 100px;
     }
 }
