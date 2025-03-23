@@ -59,6 +59,9 @@ Si deseas contribuir, sigue los pasos a continuación adaptados al contexto de e
 - **Crea un Pull Request (PR)**
 
     Ve a la página de tu fork en GitHub y haz clic en "Compare & pull request". Asegúrate de describir claramente los cambios que has realizado, como el propósito de la nueva tarjeta o las correcciones aplicadas.  
-    ![alt text](resourses/image.png)
+    ![img][def]
 
 ¡Gracias por contribuir a este proyecto educativo!
+
+
+[def]: resources/image.png
