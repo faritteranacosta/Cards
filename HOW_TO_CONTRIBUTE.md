@@ -1,5 +1,5 @@
 ## Como contribuyo?
-Este proyecto es una colección de tarjetas educativas para aprender conceptos de programación web. Si deseas contribuir, sigue los pasos a continuación adaptados al contexto de este repositorio:
+Si deseas contribuir, sigue los pasos a continuación adaptados al contexto de este repositorio:
 
 - **Crea un fork**
 
@@ -59,5 +59,6 @@ Este proyecto es una colección de tarjetas educativas para aprender conceptos d
 - **Crea un Pull Request (PR)**
 
     Ve a la página de tu fork en GitHub y haz clic en "Compare & pull request". Asegúrate de describir claramente los cambios que has realizado, como el propósito de la nueva tarjeta o las correcciones aplicadas.  
+    ![alt text](resourses/image.png)
 
 ¡Gracias por contribuir a este proyecto educativo!
