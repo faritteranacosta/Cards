@@ -17,24 +17,19 @@ body {
 }
 
 main {
-    width: 65%;
+    width: 55%;
 }
 
 section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 1000px;
-    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     padding: 20px;
     gap: 18px;
 }
 
-
-
 .card {
-    width: 150px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
     perspective: 1000px;
     cursor: pointer;
 }
@@ -57,8 +52,9 @@ section {
     height: 100%;
     backface-visibility: hidden;
     border-radius: 8px;
-    overflow: hidden;
     box-shadow: 0 0 1px #000;
+    overflow: hidden;
+
 }
 
 .card-front {
@@ -86,15 +82,24 @@ section {
 }
 
 @media (max-width: 800px) {
-    main {
-        width: 95%;
+    main{
+        width: 80%;
     }
-    
+
     section {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .container {
         padding: 5px;
     }
-    
-    .container {
-        margin: 5px;
+
+    .card{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

@@ -35,7 +35,7 @@ for (let i = 0; i < desorden.length; i++) {
             </div>
         </div>
     `);
-    const section = document.querySelector("section");
+    const section = document.getElementById("section2");
     section.append(card);
 }
 
