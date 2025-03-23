@@ -91,7 +91,7 @@ function voltear(card) {
                     playAudio(champions);
                     Swal.fire({
                         title: "¡Felicidades!",
-                        text: `Lo conseguiste en ${nMov} movimientos y  segundos`,
+                        text: `Lo conseguiste en ${nMov} movimientos y ${timeElapsed} segundos`,
                         imageUrl: "resources/win/colombia.gif",
                         imageWidth: 600,
                         imageHeight: 500,
