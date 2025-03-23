@@ -21,6 +21,7 @@ main {
 }
 
 section {
+    margin-left: 10px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     padding: 20px;
@@ -28,9 +29,10 @@ section {
 }
 
 .card {
-    width: 140px;
-    height: 140px;
+    width: 150px;
+    height: 145px;
     perspective: 1000px;
+    padding: px;
     cursor: pointer;
 }
 
@@ -88,7 +90,7 @@ section {
 
     section {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         padding: 5px;
         gap: 5px;
     }
