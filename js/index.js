@@ -10,6 +10,7 @@ var cartasEmparejadas = 0;
 const sonido = new Audio('resources/audios/carta_incorrecta.mp3');
 const sonido_correct = new Audio('resources/audios/carta_correcta.mp3');
 const champions = new Audio('resources/audios/himno_champions_league.mp3');
+const volea = new Audio('resources/audios/carta_Voltea.mp3');
 function playAudio(sonido){
     sonido.play();
 }
@@ -55,6 +56,7 @@ for (let i = 0; i < desorden.length; i++) {
 }
 
 function voltear(card) {
+    playAudio(volea);
     // Si ya están 2 cartas volteadas, la carta está volteada, o está deshabilitada, no hacer nada
     if (nCartasVolteadas >= 2 || card.classList.contains('flipped') || card.classList.contains('disabled')) {
         return;
