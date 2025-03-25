@@ -75,7 +75,6 @@ for (let i = 0; i < desorden.length; i++) {
             </div>
         </div>
     `);
-
     const section = document.getElementById("section2");
     section.append(card);
 }
@@ -105,12 +104,13 @@ function voltear(card) {
         timer = setInterval(actualizarTemporizador, 1000);
     }
     nCartasVolteadas++;
-    
+
     if (nCartasVolteadas == 1) {
         playAudio(flip);
         // Primera carta volteada
         cartaVolteada = card;
     } else if (nCartasVolteadas == 2) {
+        playAudio(volea);
         // Segunda carta volteada
         playAudio(flip);
         nMov++;
@@ -122,7 +122,7 @@ function voltear(card) {
           
 
             // Deshabilitar las cartas emparejadas
-            setTimeout(function() {
+            setTimeout(function () {
                 card.classList.add('disabled');
                 cartaVolteada.classList.add('disabled');
                 nCartasVolteadas = 0;
@@ -131,11 +131,10 @@ function voltear(card) {
                 if (cartasEmparejadas === allCards.length) {
                     clearInterval(timer); // Detiene el temporizador
                     playAudio(champions);
-                    let win = imagesWin[style];
                     Swal.fire({
                         title: "¡Felicidades!",
-                        text: `Lo conseguiste en ${nMov} movimientos y  segundos`,
-                        imageUrl: "resources/win/"+win,
+                        text: `Lo conseguiste en ${nMov} movimientos y ${timeElapsed} segundos`,
+                        imageUrl: "resources/win/colombia.gif",
                         imageWidth: 600,
                         imageHeight: 500,
                         imageAlt: "Custom image",
@@ -154,11 +153,11 @@ function voltear(card) {
         } else {
             playAudio(sonido);
             // Volver a ocultar las cartas después de un tiempo
-            setTimeout(function() {
+            setTimeout(function () {
                 card.classList.remove('flipped');
                 cartaVolteada.classList.remove('flipped');
                 nCartasVolteadas = 0;
-            }, 1000);
+            }, 600);
         }
     }
 }
