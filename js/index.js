@@ -133,7 +133,7 @@ function voltear(card) {
                     Swal.fire({
                         title: "¡Felicidades!",
                         text: `Lo conseguiste en ${nMov} movimientos y ${timeElapsed} segundos`,
-                        imageUrl: "resources/win/colombia.gif",
+                        imageUrl: `resources/win/${imagesWin[style]}`,
                         imageWidth: 600,
                         imageHeight: 500,
                         imageAlt: "Custom image",
