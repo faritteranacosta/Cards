@@ -110,7 +110,6 @@ function voltear(card) {
         // Primera carta volteada
         cartaVolteada = card;
     } else if (nCartasVolteadas == 2) {
-        playAudio(volea);
         // Segunda carta volteada
         playAudio(flip);
         nMov++;
