@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>pir of cards</title>
 </head>
+
 <body>
-    
     <main>
-        <section id = "section1">
-            <h2>
-                Movimientos: <span id="movs">0</span>
-            </h2>
-            <h2>Tiempo: <span id = "timer">0</span></h2>
+        <section id="section1">
+            <h2>Movimientos: <span id="movs">0</span></h2>
+            <div>
+                <label for="select">Selecione una opcion </label>
+            <select id="select">
+                <option value="option1">Champions League</option>
+                <option value="option2">Outer Space</option>
+                <option value="option3">Minecraft</option>
+            </select>
+            </div>
+            
+            <button onclick="changeStyle()">Select</button>
+            <h2>Tiempo: <span id="timer">0</span></h2>
         </section>
-        <section id = "section2">
-        
+        <section id="section2">
+
         </section>
     </main>
 </body>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src = "js/index.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/index.js"></script>
+
 </html>

@@ -17,15 +17,15 @@ html {
 }
 
 body {
-    background:
-    linear-gradient(to right, transparent, rgb(40, 6, 142)), url("https://raw.githubusercontent.com/faritteranacosta/Cards/refs/heads/master/resources/uefa.svg");
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100%;
 }
 
 main {
+    width: 60%;
     width: 60%;
 }
 
@@ -38,16 +38,21 @@ section {
     padding: 20px;
     gap: 18px;
     transition: all 0.5s ease-in-out; /* Transición suave */
+    transition: all 0.5s ease-in-out; /* Transición suave */
 }
 
 .card {
     width: 150px;
     height: 145px;
+    height: 145px;
     perspective: 1000px;
+    padding: px;
     padding: px;
     cursor: pointer;
     transition: transform 0.4s ease-in-out, width 0.4s ease-in-out, height 0.4s ease-in-out;
+    transition: transform 0.4s ease-in-out, width 0.4s ease-in-out, height 0.4s ease-in-out;
 }
+
 
 
 .card-inner {
@@ -71,6 +76,8 @@ section {
     box-shadow: 0 0 1px #000;
     overflow: hidden;
 
+    overflow: hidden;
+
 }
 
 .card-front {
@@ -79,6 +86,10 @@ section {
     justify-content: center;
 }
 
+.card-front img{
+    width: 100%; /* Reduce el tamaño de la imagen dentro de la carta */
+    height: 110%;
+}
 .card-front img{
     width: 100%; /* Reduce el tamaño de la imagen dentro de la carta */
     height: 110%;
@@ -105,14 +116,24 @@ section {
     main {
         width: 90%;
         transition: width 0.5s ease-in-out;
+        width: 90%;
+        transition: width 0.5s ease-in-out;
     }
+
 
     section {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         gap: 10px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
     }
 
+    .card {
+        width: 100px;
+        height: 100px;
+    }
     .card {
         width: 100px;
         height: 100px;
