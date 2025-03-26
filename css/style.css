@@ -41,6 +41,16 @@ section {
     transition: all 0.5s ease-in-out; /* Transición suave */
 }
 
+#section1 {
+    align-items: center;
+    padding-top: 8px;
+    gap: 20px;
+}
+
+#section2 {
+    padding-top: 5px;
+}
+
 .card {
     width: 150px;
     height: 145px;
@@ -53,6 +63,17 @@ section {
     transition: transform 0.4s ease-in-out, width 0.4s ease-in-out, height 0.4s ease-in-out;
 }
 
+select {
+    height: 25px;
+    border-radius: 5px; 
+}
+
+button {
+    width: 60px;
+    height: 30px;
+    cursor: pointer; 
+    border-radius: 5px; 
+  }
 
 
 .card-inner {
@@ -120,7 +141,6 @@ section {
         transition: width 0.5s ease-in-out;
     }
 
-
     section {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -128,6 +148,10 @@ section {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         gap: 10px;
+    }
+
+    #section1 {
+        font-size: small;
     }
 
     .card {
